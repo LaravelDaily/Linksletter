@@ -1,0 +1,37 @@
+name: Run tests
+
+on: [ push, pull_request ]
+
+jobs:
+  tests:
+    name: Run tests (SqLite)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv
+          coverage: none
+
+      - name: Setup Sqlite
+        run: touch database/database.sqlite
+
+      - name: Run composer install
+        run: composer install -n --prefer-dist
+
+      - name: Run NPM install
+        run: npm install
+
+      - name: Compile Assets for UI Testing
+        run: npm run build
+
+      - name: Prepare Laravel Application
+        run: |
+          cp .env.ci .env
+          php artisan key:generate
+
+      - name: Run tests
+        run: php artisan test
