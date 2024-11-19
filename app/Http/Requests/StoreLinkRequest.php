@@ -6,7 +6,10 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class StoreLinkRequest extends FormRequest
 {
-    public function rules()
+    /**
+     * @return array<string, list<string>>
+     */
+    public function rules(): array
     {
         return [
             'url' => ['required', 'string', 'url'],
@@ -16,7 +19,7 @@ class StoreLinkRequest extends FormRequest
         ];
     }
 
-    public function authorize()
+    public function authorize(): true
     {
         return true;
     }

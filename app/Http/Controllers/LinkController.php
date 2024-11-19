@@ -6,10 +6,12 @@ use App\Http\Requests\StoreLinkRequest;
 use App\Http\Requests\UpdateLinkRequest;
 use App\Models\Link;
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class LinkController extends Controller
 {
-    public function index()
+    public function index(): View
     {
         $links = Link::query()
             ->where('user_id', auth()->id())
@@ -21,7 +23,7 @@ class LinkController extends Controller
         ]);
     }
 
-    public function create()
+    public function create(): View
     {
         $users = User::all();
 
@@ -30,7 +32,7 @@ class LinkController extends Controller
         ]);
     }
 
-    public function store(StoreLinkRequest $request)
+    public function store(StoreLinkRequest $request): RedirectResponse
     {
         $link = Link::create(
             $request->validated() + [
@@ -39,7 +41,10 @@ class LinkController extends Controller
         );
 
         if (! $link->position) {
-            $link->position = Link::max('position') + 1;
+            /** @var int $maxPosition */
+            $maxPosition = Link::max('position');
+
+            $link->position = $maxPosition + 1;
             $link->save();
         }
 
@@ -47,7 +52,7 @@ class LinkController extends Controller
             ->with('message', 'Link created successfully.');
     }
 
-    public function edit(Link $link)
+    public function edit(Link $link): View
     {
         abort_unless($link->user_id === auth()->id(), 404);
 
@@ -59,7 +64,7 @@ class LinkController extends Controller
         ]);
     }
 
-    public function update(UpdateLinkRequest $request, Link $link)
+    public function update(UpdateLinkRequest $request, Link $link): RedirectResponse
     {
         abort_unless($link->user_id === auth()->id(), 404);
 
@@ -69,7 +74,7 @@ class LinkController extends Controller
             ->with('message', 'Link updated successfully.');
     }
 
-    public function destroy(Link $link)
+    public function destroy(Link $link): RedirectResponse
     {
         abort_unless($link->user_id === auth()->id(), 404);
 
