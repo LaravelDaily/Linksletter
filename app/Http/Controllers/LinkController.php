@@ -38,7 +38,7 @@ class LinkController extends Controller
             ]
         );
 
-        if (!$link->position) {
+        if (! $link->position) {
             $link->position = Link::max('position') + 1;
             $link->save();
         }

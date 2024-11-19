@@ -22,7 +22,7 @@ class LinkFactory extends Factory
             'updated_at' => Carbon::now(),
 
             // Disabled for now, since we don't have issues workflow yet
-//            'issue_id' => Issue::factory(),
+            //            'issue_id' => Issue::factory(),
             'user_id' => User::factory(),
         ];
     }
