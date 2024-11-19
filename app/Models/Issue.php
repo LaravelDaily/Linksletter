@@ -12,7 +12,7 @@ class Issue extends Model
     use HasFactory;
 
     protected $fillable = [
-        'subject', 'header_text', 'footer_text', 'links_html', 'sent_at', 'user_id'
+        'subject', 'header_text', 'footer_text', 'links_html', 'sent_at', 'user_id',
     ];
 
     public function links(): HasMany

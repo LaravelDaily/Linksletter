@@ -11,7 +11,7 @@ class Link extends Model
     use HasFactory;
 
     protected $fillable = [
-        'url', 'title', 'description', 'issue_id', 'position', 'user_id'
+        'url', 'title', 'description', 'issue_id', 'position', 'user_id',
     ];
 
     public function issue(): BelongsTo
