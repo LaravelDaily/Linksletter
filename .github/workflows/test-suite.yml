@@ -16,6 +16,9 @@ jobs:
           extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv
           coverage: none
 
+      - name: Setup Sqlite
+        run: touch database/database.sqlite
+
       - name: Run composer install
         run: composer install -n --prefer-dist
 
