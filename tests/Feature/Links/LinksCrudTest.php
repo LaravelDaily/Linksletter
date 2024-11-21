@@ -125,6 +125,21 @@ it('can list links', function () {
         ->assertSeeTextInOrder($links->pluck('title')->reverse()->toArray());
 });
 
+it('can see pagination on list', function () {
+    $user = User::factory()->create();
+    $links = Link::factory()
+        ->count(100)
+        ->create([
+            'user_id' => $user->id,
+        ]);
+
+    actingAs($user);
+
+    get(route('links.index'))
+        ->assertStatus(200)
+        ->assertSee('Next');
+});
+
 it('can create link with no position but still generate one', function () {
     $user = User::factory()->create();
 

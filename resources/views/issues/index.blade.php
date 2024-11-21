@@ -45,7 +45,9 @@
                         </tbody>
                     </table>
 
-                    {{ $issues->links() }}
+                    <div class="mt-4">
+                        {{ $issues->links() }}
+                    </div>
                 </div>
             </div>
         </div>
