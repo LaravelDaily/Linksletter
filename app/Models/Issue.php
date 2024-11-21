@@ -17,6 +17,14 @@ class Issue extends Model
         'subject', 'header_text', 'footer_text', 'links_html', 'sent_at', 'user_id',
     ];
 
+    protected function casts(): array
+    {
+        return [
+            'sent_at' => 'datetime',
+            'created_at' => 'datetime',
+        ];
+    }
+
     /**
      * @return HasMany<Link, $this>
      */
