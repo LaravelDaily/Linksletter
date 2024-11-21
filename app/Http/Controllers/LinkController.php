@@ -16,7 +16,7 @@ class LinkController extends Controller
         $links = Link::query()
             ->where('user_id', auth()->id())
             ->orderBy('id', 'desc')
-            ->paginate(1);
+            ->paginate(50);
 
         return view('links.index', [
             'links' => $links,

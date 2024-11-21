@@ -62,6 +62,18 @@ test('can list issues', function () {
         ->assertSee($issues->pluck('subject')->toArray());
 });
 
+test('can see pagination on list', function () {
+    $user = User::factory()->create();
+    $issues = Issue::factory()->count(100)->create(['user_id' => $user->id]);
+
+    actingAs($user);
+
+    // Check if the issues list page is accessible
+    get(route('issues.index'))
+        ->assertStatus(200)
+        ->assertSeeText('Next');
+});
+
 test('issue create button visibility toggles based on free links count', function () {
     $user = User::factory()->create();
 
