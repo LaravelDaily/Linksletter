@@ -6,6 +6,7 @@ use Laravel\Socialite\Contracts\Factory;
 use Laravel\Socialite\Contracts\Provider;
 use Laravel\Socialite\Facades\Socialite;
 use Laravel\Socialite\Two\User;
+
 use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\followingRedirects;
 use function Pest\Laravel\get;
@@ -13,10 +14,12 @@ use function Pest\Laravel\get;
 uses(RefreshDatabase::class);
 
 test('', function () {
-    Socialite::swap(new class implements Factory {
+    Socialite::swap(new class implements Factory
+    {
         public function driver($driver = null)
         {
-            return new class implements Provider {
+            return new class implements Provider
+            {
                 public function redirect(): RedirectResponse
                 {
                     return new RedirectResponse(route('social.callback', ['provider' => 'google']));
@@ -24,7 +27,7 @@ test('', function () {
 
                 public function user(): User
                 {
-                    $user = new User();
+                    $user = new User;
                     $user->name = 'John Doe';
                     $user->email = 'john.doe@example.com';
 
@@ -42,6 +45,6 @@ test('', function () {
 
     assertDatabaseHas('users', [
         'name' => 'John Doe',
-        'email' => 'john.doe@example.com'
+        'email' => 'john.doe@example.com',
     ]);
 });
