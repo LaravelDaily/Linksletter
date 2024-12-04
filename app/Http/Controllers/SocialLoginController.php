@@ -9,9 +9,9 @@ use Laravel\Socialite\Facades\Socialite;
 
 class SocialLoginController extends Controller
 {
-    public function redirectToProvider(string $provider)
+    public function redirectToProvider(string $provider): \Symfony\Component\HttpFoundation\RedirectResponse
     {
-        if (!in_array($provider, config('auth.socialite.drivers'), true)) {
+        if (! in_array($provider, (array) config('auth.socialite.drivers'), true)) {
             abort(404, 'Social Provider is not supported');
         }
 
@@ -20,7 +20,7 @@ class SocialLoginController extends Controller
 
     public function handleProviderCallback(string $provider): RedirectResponse
     {
-        if (!in_array($provider, config('auth.socialite.drivers'), true)) {
+        if (! in_array($provider, (array) config('auth.socialite.drivers'), true)) {
             abort(404, 'Social Provider is not supported');
         }
 
@@ -38,8 +38,8 @@ class SocialLoginController extends Controller
             $newUser = new User;
             $newUser->provider_name = $provider;
             $newUser->provider_id = $user->getId();
-            $newUser->name = $user->getName();
-            $newUser->email = $user->getEmail();
+            $newUser->name = $user->getName() ?? '';
+            $newUser->email = $user->getEmail() ?? '';
             $newUser->email_verified_at = now();
             $newUser->avatar = $user->getAvatar();
             $newUser->save();
