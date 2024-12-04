@@ -8,6 +8,7 @@
         "php": "^8.2",
         "laravel/breeze": "^2.2",
         "laravel/framework": "^11.9",
+        "laravel/socialite": "^5.16",
         "laravel/tinker": "^2.9",
         "sentry/sentry-laravel": "^4.10"
     },
