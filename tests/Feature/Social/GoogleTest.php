@@ -13,7 +13,7 @@ use function Pest\Laravel\get;
 
 uses(RefreshDatabase::class);
 
-test('', function () {
+test('google social login works', function () {
     Socialite::swap(new class implements Factory
     {
         public function driver($driver = null)
