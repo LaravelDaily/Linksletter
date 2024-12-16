@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GetAiSuggestionController;
 use App\Http\Controllers\IssueController;
 use App\Http\Controllers\LinkController;
 use App\Http\Controllers\ProfileController;
@@ -20,6 +21,8 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('links', LinkController::class);
     Route::resource('issues', IssueController::class)->except(['edit', 'update', 'destroy']);
+
+    Route::post('ai-header-footer', GetAiSuggestionController::class)->name('get-ai-suggestion');
 });
 
 require __DIR__.'/auth.php';
