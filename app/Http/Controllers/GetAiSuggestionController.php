@@ -13,10 +13,10 @@ class GetAiSuggestionController extends Controller
     {
         return match ($request->input('type')) {
             'header' => response()->json([
-                'text' => (new AiProvider())->getHeader(auth()->id(), $request->input('provider'))
+                'text' => (new AiProvider)->getHeader((int) auth()->id(), $request->string('provider')),
             ]),
             'footer' => response()->json([
-                'text' => (new AiProvider())->getFooter(auth()->id(), $request->input('provider'))
+                'text' => (new AiProvider)->getFooter((int) auth()->id(), $request->string('provider')),
             ]),
             default => throw new InvalidArgumentException('Invalid type'),
         };

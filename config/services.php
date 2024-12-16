@@ -45,5 +45,5 @@ return [
         'openai' => [
             'key' => env('OPENAI_KEY'),
         ],
-    ]
+    ],
 ];

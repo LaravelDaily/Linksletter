@@ -5,6 +5,7 @@ namespace App\Services\Ai;
 use App\Models\Link;
 use Exception;
 use Illuminate\Support\Facades\Http;
+
 use function Sentry\captureException;
 
 class OpenAi
@@ -15,7 +16,7 @@ class OpenAi
             'linkTitles' => Link::query()
                 ->where('user_id', $userId)
                 ->whereNull('issue_id')
-                ->pluck('title')
+                ->pluck('title'),
         ])->render();
 
         return $this->callOpenAI($prompt);
@@ -27,7 +28,7 @@ class OpenAi
             'linkTitles' => Link::query()
                 ->where('user_id', $userId)
                 ->whereNull('issue_id')
-                ->pluck('title')
+                ->pluck('title'),
         ])->render();
 
         return $this->callOpenAI($prompt);
@@ -36,24 +37,25 @@ class OpenAi
     private function callOpenAI(string $prompt): string
     {
         try {
-            $aiQuery = Http::withToken(config('services.ai.openai.key'))
+            $aiQuery = Http::withToken(config()->string('services.ai.openai.key'))
                 ->asJson()
                 ->acceptJson()
                 ->post('https://api.openai.com/v1/chat/completions', [
-                    "model" => "gpt-4o",
-                    "messages" => [
-                        ["role" => "user", "content" => $prompt]
-                    ]
+                    'model' => 'gpt-4o',
+                    'messages' => [
+                        ['role' => 'user', 'content' => $prompt],
+                    ],
                 ]);
 
-            return $this->parseResponse($aiQuery->json());
+            return $this->parseResponse((array) $aiQuery->json());
         } catch (Exception $e) {
             captureException($e); // Sends the exception to Sentry
 
-            return "We were unable to generate the content at this time. Please try again later.";
+            return 'We were unable to generate the content at this time. Please try again later.';
         }
     }
 
+    /** @phpstan-ignore-next-line  */
     private function parseResponse(array $response): string
     {
         return $response['choices'][0]['message']['content'];

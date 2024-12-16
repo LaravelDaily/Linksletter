@@ -10,7 +10,7 @@ class AiProvider
     public function getHeader(int $userId, string $provider): string
     {
         return match ($provider) {
-            Aiproviders::OPENAI->name => (new OpenAi())->getHeader($userId),
+            Aiproviders::OPENAI->name => (new OpenAi)->getHeader($userId),
             default => throw new Exception('Provider not supported'),
         };
     }
@@ -18,7 +18,7 @@ class AiProvider
     public function getFooter(int $userId, string $provider): string
     {
         return match ($provider) {
-            AiProviders::OPENAI->name => (new OpenAi())->getFooter($userId),
+            AiProviders::OPENAI->name => (new OpenAi)->getFooter($userId),
             default => throw new Exception('Provider not supported'),
         };
     }
