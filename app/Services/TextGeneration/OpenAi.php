@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Ai;
+namespace App\Services\TextGeneration;
 
 use App\Models\Link;
 use Exception;
@@ -12,7 +12,7 @@ class OpenAi
 {
     public function getHeader(int $userId): string
     {
-        $prompt = view('ai.openai.header', [
+        $prompt = view('text-generation.openai.header', [
             'linkTitles' => Link::query()
                 ->where('user_id', $userId)
                 ->whereNull('issue_id')
@@ -24,7 +24,7 @@ class OpenAi
 
     public function getFooter(int $userId): string
     {
-        $prompt = view('ai.openai.footer', [
+        $prompt = view('text-generation.openai.footer', [
             'linkTitles' => Link::query()
                 ->where('user_id', $userId)
                 ->whereNull('issue_id')

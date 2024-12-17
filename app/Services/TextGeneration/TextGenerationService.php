@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Services\Ai;
+namespace App\Services\TextGeneration;
 
-use App\Enums\AiProviders;
+use App\Enums\TextGenerationProviders;
 use Exception;
 
 class TextGenerationService
@@ -10,7 +10,7 @@ class TextGenerationService
     public function getHeader(int $userId, string $provider): string
     {
         return match ($provider) {
-            Aiproviders::OPENAI->name => (new OpenAi)->getHeader($userId),
+            TextGenerationProviders::OPENAI->name => (new OpenAi)->getHeader($userId),
             default => throw new Exception('Provider not supported'),
         };
     }
@@ -18,7 +18,7 @@ class TextGenerationService
     public function getFooter(int $userId, string $provider): string
     {
         return match ($provider) {
-            AiProviders::OPENAI->name => (new OpenAi)->getFooter($userId),
+            TextGenerationProviders::OPENAI->name => (new OpenAi)->getFooter($userId),
             default => throw new Exception('Provider not supported'),
         };
     }

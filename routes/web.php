@@ -22,7 +22,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('links', LinkController::class);
     Route::resource('issues', IssueController::class)->except(['edit', 'update', 'destroy']);
 
-    Route::post('text-generation', TextGenerationController::class)->name('get-ai-suggestion');
+    Route::post('text-generation', TextGenerationController::class)->name('text-generation');
 });
 
 require __DIR__.'/auth.php';

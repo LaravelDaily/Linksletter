@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests;
 
-use App\Enums\AiProviders;
+use App\Enums\TextGenerationProviders;
 use Illuminate\Foundation\Http\FormRequest;
 
-class GetAiResponseRequest extends FormRequest
+class TextGenerationRequest extends FormRequest
 {
     /**
      * @return array<string, list<string>>
@@ -14,7 +14,7 @@ class GetAiResponseRequest extends FormRequest
     {
         return [
             'type' => ['string', 'in:header,footer'],
-            'provider' => ['required', 'string', 'in:'.collect(AiProviders::cases())->pluck('name')->implode(',')],
+            'provider' => ['required', 'string', 'in:'.collect(TextGenerationProviders::cases())->pluck('name')->implode(',')],
         ];
     }
 

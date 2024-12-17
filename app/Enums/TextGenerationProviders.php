@@ -2,7 +2,7 @@
 
 namespace App\Enums;
 
-enum AiProviders
+enum TextGenerationProviders
 {
     case OPENAI;
     case CLAUDE; // TODO

@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\GetAiResponseRequest;
-use App\Services\Ai\TextGenerationService;
+use App\Http\Requests\TextGenerationRequest;
+use App\Services\TextGeneration\TextGenerationService;
 use Exception;
 use Illuminate\Http\JsonResponse;
 
 class TextGenerationController extends Controller
 {
-    public function __invoke(GetAiResponseRequest $request): JsonResponse
+    public function __invoke(TextGenerationRequest $request): JsonResponse
     {
         return response()->json([
             'text' => match ($request->input('type')) {
