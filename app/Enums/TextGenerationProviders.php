@@ -2,9 +2,9 @@
 
 namespace App\Enums;
 
-enum TextGenerationProviders
+enum TextGenerationProviders:string
 {
-    case OPENAI;
-    case CLAUDE; // TODO
-    case GEMINI; // TODO
+    case OPENAI = 'openai';
+    case CLAUDE = 'claude'; // TODO
+    case GEMINI = 'gemini'; // TODO
 }
