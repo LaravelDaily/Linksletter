@@ -2,7 +2,7 @@
 
 namespace App\Enums;
 
-enum TextGenerationProviders:string
+enum TextGenerationProviders: string
 {
     case OPENAI = 'openai';
     case CLAUDE = 'claude'; // TODO
