@@ -5,7 +5,7 @@ namespace App\Services\Ai;
 use App\Enums\AiProviders;
 use Exception;
 
-class AiProvider
+class TextGenerationService
 {
     public function getHeader(int $userId, string $provider): string
     {

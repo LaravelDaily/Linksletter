@@ -84,7 +84,7 @@
         </div>
         <script>
             function askAi(type) {
-                fetch('/ai-header-footer', {
+                fetch('/text-generation', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -92,7 +92,7 @@
                     },
                     body: JSON.stringify({
                         type,
-                        provider: 'OPENAI'
+                        provider: 'OPENAI' // TODO: Once we have multiple providers, we can make this dynamic
                     })
                 })
                     .then(response => response.json())
