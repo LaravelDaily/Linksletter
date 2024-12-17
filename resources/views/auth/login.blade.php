@@ -39,6 +39,12 @@
                 </a>
             @endif
 
+            <x-primary-button-link
+                    class="ml-2"
+                    :href="route('social.login', 'google')">
+                {{ __('Google Sign In') }}
+            </x-primary-button-link>
+
             <x-primary-button class="ms-3">
                 {{ __('Log in') }}
             </x-primary-button>
