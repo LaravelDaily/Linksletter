@@ -92,7 +92,7 @@
                     },
                     body: JSON.stringify({
                         type,
-                        provider: 'OPENAI' // TODO: Once we have multiple providers, we can make this dynamic
+                        provider: 'openai' // TODO: Once we have multiple providers, we can make this dynamic
                     })
                 })
                     .then(response => response.json())
