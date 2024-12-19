@@ -3,6 +3,7 @@
 use App\Http\Controllers\IssueController;
 use App\Http\Controllers\LinkController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TextGenerationController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -20,6 +21,8 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('links', LinkController::class);
     Route::resource('issues', IssueController::class)->except(['edit', 'update', 'destroy']);
+
+    Route::post('text-generation', TextGenerationController::class)->name('text-generation');
 });
 
 require __DIR__.'/auth.php';

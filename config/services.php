@@ -41,4 +41,9 @@ return [
         'redirect' => env('GOOGLE_REDIRECT'),
     ],
 
+    'ai' => [
+        'openai' => [
+            'key' => env('OPENAI_KEY'),
+        ],
+    ],
 ];

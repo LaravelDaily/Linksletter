@@ -28,6 +28,9 @@
                             <label for="header_text" class="block text-sm font-medium text-gray-700">Header Text</label>
                             <textarea name="header_text" id="header_text"
                                       class="form-textarea rounded-md shadow-sm mt-1 block w-full">{{ old('header_text') }}</textarea>
+                            <button type="button" onclick="generateText('header', 'openai')">
+                                Ask AI to generate the header
+                            </button>
                             @error('header_text')
                             <p class="text-red-500">{{ $message }}</p>
                             @enderror
@@ -37,6 +40,9 @@
                             <label for="footer_text" class="block text-sm font-medium text-gray-700">Footer Text</label>
                             <textarea name="footer_text" id="footer_text"
                                       class="form-textarea rounded-md shadow-sm mt-1 block w-full">{{ old('footer_text') }}</textarea>
+                            <button type="button" onclick="generateText('footer', 'openai')">
+                                Ask AI to generate the footer
+                            </button>
                             @error('footer_text')
                             <p class="text-red-500">{{ $message }}</p>
                             @enderror
@@ -76,5 +82,28 @@
                 </div>
             </div>
         </div>
+        <script>
+            function generateText(type, provider) {
+                fetch('/text-generation', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    },
+                    body: JSON.stringify({
+                        type,
+                        provider: provider
+                    })
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (type === 'header') {
+                            document.getElementById('header_text').value = data.text;
+                        } else {
+                            document.getElementById('footer_text').value = data.text;
+                        }
+                    });
+            }
+        </script>
     </div>
 </x-app-layout>
