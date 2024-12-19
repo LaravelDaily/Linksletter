@@ -5,10 +5,9 @@ namespace App\Services\TextGeneration;
 use App\Models\Link;
 use Exception;
 use Illuminate\Support\Facades\Http;
-
 use function Sentry\captureException;
 
-class OpenAi
+class OpenAi implements TextGenerator
 {
     public function getHeader(int $userId): string
     {
