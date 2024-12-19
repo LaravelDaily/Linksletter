@@ -9,12 +9,12 @@ use Illuminate\Http\JsonResponse;
 
 class TextGenerationController extends Controller
 {
-    public function __invoke(TextGenerationRequest $request): JsonResponse
+    public function __invoke(TextGenerationRequest $request, TextGenerationService $textGenerationService): JsonResponse
     {
         return response()->json([
             'text' => match ($request->input('type')) {
-                'header' => (new TextGenerationService)->getHeader((int) auth()->id(), $request->string('provider')),
-                'footer' => (new TextGenerationService)->getFooter((int) auth()->id(), $request->string('provider')),
+                'header' => $textGenerationService->getHeader((int)auth()->id(), $request->string('provider')),
+                'footer' => $textGenerationService->getFooter((int)auth()->id(), $request->string('provider')),
                 default => throw new Exception('Provider not supported'), // Required for phpstan.
             },
         ]);

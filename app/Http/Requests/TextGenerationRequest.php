@@ -14,7 +14,7 @@ class TextGenerationRequest extends FormRequest
     {
         return [
             'type' => ['string', 'in:header,footer'],
-            'provider' => ['required', 'string', 'in:'.collect(TextGenerationProviders::cases())->pluck('name')->implode(',')],
+            'provider' => ['required', 'string', 'in:'.collect(TextGenerationProviders::cases())->pluck('value')->implode(',')],
         ];
     }
 
