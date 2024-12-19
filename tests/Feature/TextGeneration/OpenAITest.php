@@ -1,12 +1,12 @@
 <?php
 
 use App\Enums\TextGenerationProviders;
-use App\Models\Link;
 use App\Models\User;
+use App\Services\TextGeneration\TextGenerationService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\postJson;
-use App\Services\TextGeneration\TextGenerationService;
 
 uses(RefreshDatabase::class);
 

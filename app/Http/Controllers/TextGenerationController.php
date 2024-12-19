@@ -13,8 +13,8 @@ class TextGenerationController extends Controller
     {
         return response()->json([
             'text' => match ($request->input('type')) {
-                'header' => $textGenerationService->getHeader((int)auth()->id(), $request->string('provider')),
-                'footer' => $textGenerationService->getFooter((int)auth()->id(), $request->string('provider')),
+                'header' => $textGenerationService->getHeader((int) auth()->id(), $request->string('provider')),
+                'footer' => $textGenerationService->getFooter((int) auth()->id(), $request->string('provider')),
                 default => throw new Exception('Provider not supported'), // Required for phpstan.
             },
         ]);
