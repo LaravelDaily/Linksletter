@@ -28,7 +28,7 @@
                             <label for="header_text" class="block text-sm font-medium text-gray-700">Header Text</label>
                             <textarea name="header_text" id="header_text"
                                       class="form-textarea rounded-md shadow-sm mt-1 block w-full">{{ old('header_text') }}</textarea>
-                            <button type="button" onclick="askAi('header')">
+                            <button type="button" onclick="generateText('header', 'openai')">
                                 Ask AI to generate the header
                             </button>
                             @error('header_text')
@@ -40,7 +40,7 @@
                             <label for="footer_text" class="block text-sm font-medium text-gray-700">Footer Text</label>
                             <textarea name="footer_text" id="footer_text"
                                       class="form-textarea rounded-md shadow-sm mt-1 block w-full">{{ old('footer_text') }}</textarea>
-                            <button type="button" onclick="askAi('footer')">
+                            <button type="button" onclick="generateText('footer', 'openai')">
                                 Ask AI to generate the footer
                             </button>
                             @error('footer_text')
@@ -83,7 +83,7 @@
             </div>
         </div>
         <script>
-            function askAi(type) {
+            function generateText(type, provider) {
                 fetch('/text-generation', {
                     method: 'POST',
                     headers: {
@@ -92,7 +92,7 @@
                     },
                     body: JSON.stringify({
                         type,
-                        provider: 'openai' // TODO: Once we have multiple providers, we can make this dynamic
+                        provider: provider
                     })
                 })
                     .then(response => response.json())
